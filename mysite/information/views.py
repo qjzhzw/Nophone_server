@@ -17,16 +17,20 @@ def send_information(request):
 	if request.method == 'POST':
 		data1 = request.POST['identification']#获取用户名
 		data2 = request.POST['password']#获取密码
-		user = information(identification = data1, password = data2)  
-		user.save()
-		return HttpResponse('success')
+		result = information.objects.filter(identification = data1)
 		
-	if request.method == 'GET':
-		data1 = request.GET['identification']#获取用户名
-		data2 = request.GET['password']#获取密码
-		user = information(identification = data1, password = data2)  
-		user.save()
-		return HttpResponse('success')
+		data={}
+		if(len(result) > 0):
+			data['status'] = 'registered'
+			return HttpResponse(simplejson.dumps(data))
+		else:
+			user = information()
+			user.identification = data1
+			user.password = data2
+			user.birthday = '1970-1-1'
+			user.save()
+			data['status'] = 'success'
+			return HttpResponse(simplejson.dumps(data))
 
 
 # Create your views here.
