@@ -3,5 +3,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns=[
-	url(r'^send_information/', views.send_information, name='send_information'),
+	url(r'^register/', views.register, name='register'),
+	url(r'^login/', views.login, name='login'),
 ]
