@@ -25,7 +25,7 @@ def register(request):
 			user = information()
 			user.identification = data1
 			user.password = data2
-			user.birthday = '1970-1-1'
+			user.birthday = '1970-1-1'#生日必须有个缺省值
 			user.save()
 			data['status'] = 'success'
 		
@@ -77,6 +77,24 @@ def login(request):
 			data['status'] = 'success'
 		else:
 			data['status'] = 'not_matched'
+		
+		return HttpResponse(simplejson.dumps(data))
+
+
+def user(request):
+	if request.method == 'POST':
+		flag = request.POST['identification']#获取用户名
+		result = information.objects.filter(identification = flag).last()
+		
+		data = {}
+		data['nickname'] = result.nickname
+		data['sex'] = result.sex
+		data['birthday'] = str(result.birthday)
+		data['constellation'] = result.constellation
+		data['hobby'] = result.hobby
+		data['email'] = result.email
+		data['motto'] = result.motto
+		data['head'] = '111'
 		
 		return HttpResponse(simplejson.dumps(data))
 
