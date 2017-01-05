@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django import forms
 import simplejson
 
-from .models import information
+from .models import information,goods
 	
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
@@ -25,7 +25,6 @@ def register(request):
 			user = information()
 			user.identification = data1
 			user.password = data2
-			user.birthday = '1970-1-1'#生日必须有个缺省值
 			user.save()
 			data['status'] = 'success'
 		
@@ -95,6 +94,9 @@ def user(request):
 		data['email'] = result.email
 		data['motto'] = result.motto
 		data['head'] = '111'
+		data['level'] = result.level
+		data['money'] = result.money
+		data['experience'] = result.experience
 		
 		return HttpResponse(simplejson.dumps(data))
 
