@@ -3,7 +3,7 @@
 from .models import information,goods
 
 class InformationAdmin(admin.ModelAdmin):
-	list_display = ('identification', 'password', 'nickname', 'level', 'money', 'experience')
+	list_display = ('identification', 'password', 'nickname', 'level', 'money', 'experience', 'head')
 	fieldsets = (
 		['基本信息',{
 			'fields':('identification', 'password'),

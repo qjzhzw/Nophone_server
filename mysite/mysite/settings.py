@@ -100,6 +100,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATICFILES_DIRS = (
+    'mysite/medias'
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -108,9 +112,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'
 
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = '/media/'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 USE_I18N = True
 

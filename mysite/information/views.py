@@ -101,4 +101,37 @@ def user(request):
 		return HttpResponse(simplejson.dumps(data))
 
 
+def market_information(request):
+	if request.method == 'POST':
+		flag = request.POST['identification']#获取用户名
+		result = information.objects.filter(identification = flag).last()
+		
+		data = {}
+		data['nickname'] = result.nickname
+		data['head'] = '111'
+		data['level'] = result.level
+		data['money'] = result.money
+		data['experience'] = result.experience
+		
+		return HttpResponse(simplejson.dumps(data))
+
+
+def market_goods(request):
+	if request.method == 'POST':
+		number = request.POST['number']#获取个数
+		result = goods.objects.filter().all()
+		
+		data = {}
+		for i in range(0,int(number)):
+			content = {}
+			content['name'] = result[len(result) - i - 1].name
+			content['address'] = result[len(result) - i - 1].address
+			content['explanation'] = result[len(result) - i - 1].explanation
+			content['price'] = result[len(result) - i - 1].price
+			content['picture'] = "111"
+			data['goods' + str(i + 1)] = content
+		
+		return HttpResponse(simplejson.dumps(data))
+
+
 # Create your views here.
