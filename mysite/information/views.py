@@ -134,4 +134,21 @@ def market_goods(request):
 		return HttpResponse(simplejson.dumps(data))
 
 
+def tree_water(request):
+	if request.method == 'POST':
+		flag = request.POST['identification']#获取用户名
+		result = information.objects.filter(identification = flag).last()
+		result.experience += 1
+		result.save()
+		
+		data={}
+		try:
+			data['status'] = 'success'
+		except Exception, e:
+			print e
+			data['status'] = 'error'
+		
+		return HttpResponse(simplejson.dumps(data))
+
+
 # Create your views here.
