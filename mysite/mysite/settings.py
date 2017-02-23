@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'information',
+	'information',
 ]
 
 MIDDLEWARE = [
@@ -100,10 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATICFILES_DIRS = (
-    'mysite/medias'
-)
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -112,18 +108,21 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Shanghai'
 
-MEDIA_ROOT = '/media/'
-
-MEDIA_URL = '/media/'
-
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+
+import os
+HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.join(HERE, '../')
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(HERE, 'static/'),
+)

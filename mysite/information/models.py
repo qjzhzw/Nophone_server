@@ -14,7 +14,7 @@ class information(models.Model):
 	hobby = models.CharField('爱好', max_length = 20)
 	email = models.EmailField('邮箱')
 	motto = models.CharField('签名', max_length = 20)
-	head = models.ImageField('头像', upload_to = 'img')
+	head = models.FileField('头像', upload_to = 'static/head')
 	level = models.IntegerField('等级', default = 0)
 	money = models.IntegerField('金币', default = 0)
 	experience = models.IntegerField('经验', default = 0)
@@ -26,7 +26,7 @@ class goods(models.Model):
 	address = models.CharField('店铺地址', max_length = 20)
 	explanation = models.CharField('奖品说明', max_length = 20)
 	price = models.IntegerField('金币', default = 0)
-	picture = models.ImageField('图片', upload_to = 'img')
+	picture = models.FileField('图片', upload_to = 'static/goods')
 	def __unicode__(self):
 		return self.name
 

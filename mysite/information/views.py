@@ -11,7 +11,6 @@ from .models import information,goods
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 
-
 def register(request):
 	if request.method == 'POST':
 		data1 = request.POST['identification']#获取用户名
@@ -30,6 +29,7 @@ def register(request):
 		
 		return HttpResponse(simplejson.dumps(data))
 
+base_url = 'http://qjzhzw.tunnel.qydev.com/'
 
 def register_information(request):
 	if request.method == 'POST':
@@ -93,7 +93,7 @@ def user(request):
 		data['hobby'] = result.hobby
 		data['email'] = result.email
 		data['motto'] = result.motto
-		data['head'] = '111'
+		data['head'] = base_url + result.head.url
 		data['level'] = result.level
 		data['money'] = result.money
 		data['experience'] = result.experience
@@ -108,7 +108,7 @@ def market_information(request):
 		
 		data = {}
 		data['nickname'] = result.nickname
-		data['head'] = '111'
+		data['head'] = base_url + result.head.url
 		data['level'] = result.level
 		data['money'] = result.money
 		data['experience'] = result.experience
@@ -117,9 +117,11 @@ def market_information(request):
 
 
 def market_goods(request):
+	
 	if request.method == 'POST':
-		number = request.POST['number']#获取个数
+#		number = request.POST['number']#获取个数
 		result = goods.objects.filter().all()
+		number = len(result)
 		
 		data = {}
 		for i in range(0,int(number)):
@@ -128,7 +130,7 @@ def market_goods(request):
 			content['address'] = result[len(result) - i - 1].address
 			content['explanation'] = result[len(result) - i - 1].explanation
 			content['price'] = result[len(result) - i - 1].price
-			content['picture'] = "111"
+			content['picture'] = base_url + result[len(result) - i - 1].picture.url
 			data['goods' + str(i + 1)] = content
 		
 		return HttpResponse(simplejson.dumps(data))
