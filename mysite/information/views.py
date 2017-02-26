@@ -117,13 +117,13 @@ def market_information(request):
 
 
 def market_goods(request):
-	
 	if request.method == 'POST':
 #		number = request.POST['number']#获取个数
 		result = goods.objects.filter().all()
 		number = len(result)
 		
 		data = {}
+		data['number'] = number
 		for i in range(0,int(number)):
 			content = {}
 			content['name'] = result[len(result) - i - 1].name
@@ -132,6 +132,38 @@ def market_goods(request):
 			content['price'] = result[len(result) - i - 1].price
 			content['picture'] = base_url + result[len(result) - i - 1].picture.url
 			data['goods' + str(i + 1)] = content
+		
+		return HttpResponse(simplejson.dumps(data))
+
+
+def goods_information(request):
+	if request.method == 'POST':
+		flag = request.POST['name']#获取商品名称
+		result = goods.objects.filter(name = flag).last()
+		
+		data={}
+		data['address'] = result.address
+		data['explanation'] = result.explanation
+		data['price'] = result.price
+		data['picture'] = base_url + result.picture.url
+		
+		return HttpResponse(simplejson.dumps(data))
+		
+		
+def goods_change(request):
+	if request.method == 'POST':
+		data1 = request.POST['identification']#获取用户名
+		result1 = information.objects.filter(identification = data1).last()
+		data2 = request.POST['name']#获取商品名称
+		result2 = goods.objects.filter(name = data2).last()
+		
+		data={}
+		if result1.money - result2.price < 0:
+			data['status'] = 'not enough'
+		else:
+			result1.money -= result2.price
+			result1.save()
+			data['status'] = 'success'
 		
 		return HttpResponse(simplejson.dumps(data))
 

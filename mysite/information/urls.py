@@ -9,5 +9,7 @@ urlpatterns=[
 	url(r'^user/', views.user, name='user'),
 	url(r'^market_information/', views.market_information, name='market_information/'),
 	url(r'^market_goods/', views.market_goods, name='market_goods/'),
+	url(r'^goods_information/', views.goods_information, name='goods_information/'),
+	url(r'^goods_change/', views.goods_change, name='goods_change/'),
 	url(r'^tree_water/', views.tree_water, name='tree_water/'),
 ]
