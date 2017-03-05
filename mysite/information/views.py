@@ -8,6 +8,7 @@ import simplejson
 import sms
 
 from .models import information,goods,phone
+from Web_Spider import Spider
 	
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
@@ -195,17 +196,27 @@ def goods_change(request):
 		
 		
 def course(request):
+#	if request.method == 'GET':
+#		data_account = '1030614420'#获取学号
+#		data_password = '32050219960114003X'#获取密码
 	if request.method == 'POST':
-		data_identification = request.POST['identification']#获取学号
+		data_account = request.POST['account']#获取学号
 		data_password = request.POST['password']#获取密码
+		url = 'http://jwxt.jiangnan.edu.cn/jndx/default5.aspx'
+		xnd = '2016-2017'#学年
+		xqd = '2'#学期
 		
-		data={}
-		try:
-			print flag1
-			data['status'] = 'success'
-		except Exception, e:
-			print e
+		data = {}
+		spider = Spider(url, data_account, data_password, xnd, xqd)
+		name = spider.loginWeb()
+		if name == 'Error':
+			print 'Web Login Failed'
 			data['status'] = 'error'
+		else:
+			print 'code right'
+			content = spider.timeTable()
+			data['content'] = content
+			data['status'] = 'success'
 		
 		return HttpResponse(simplejson.dumps(data))
 		

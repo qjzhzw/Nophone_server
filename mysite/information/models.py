@@ -7,7 +7,7 @@ from django.db import models
 class information(models.Model):
 	identification = models.IntegerField('账号')
 	password = models.CharField('密码', max_length = 20)
-	nickname = models.CharField('昵称', max_length = 20, default = '我的昵称')
+	nickname = models.CharField('昵称', max_length = 20, default = '您尚未设置昵称')
 	sex = models.CharField('性别', max_length = 20, default = '汉子')
 	birthday = models.DateField('生日', default = '1970-1-1')
 	constellation = models.CharField('星座', max_length = 20, default = '白羊座')
