@@ -50,7 +50,7 @@ def register(request):
 		
 		return HttpResponse(simplejson.dumps(data))
 
-base_url = 'http://qjzhzw.tunnel.qydev.com/'
+base_url = 'http://nophone.tunnel.qydev.com/'
 
 def register_information(request):
 	if request.method == 'POST':

@@ -24,7 +24,7 @@ class information(models.Model):
 class goods(models.Model):
 	name = models.CharField('商品名称', max_length = 20)
 	address = models.CharField('店铺地址', max_length = 20)
-	explanation = models.CharField('奖品说明', max_length = 20)
+	explanation = models.CharField('奖品说明', max_length = 100)
 	price = models.IntegerField('金币', default = 0)
 	picture = models.FileField('图片', upload_to = 'static/goods')
 	def __unicode__(self):
